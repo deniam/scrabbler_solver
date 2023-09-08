@@ -19,3 +19,4 @@ Class ScrabblerSolver
 * getWordsChart()
 
 ![Alt text](diagram.png)
+![Alt text](tests.png)

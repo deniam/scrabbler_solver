@@ -12,7 +12,35 @@ class ScrabblerSolver {
         }
     };
 
-    
+    decodeWord(scrabbler) {
+        this.word = scrabbler.getWord();
+        this.decodedWord = scrabbler.getWord().split('');
+        console.log(this.word);
+    };
+
+    calculatePoints() {
+        this.points = 0;
+        this.decodedWord.forEach((char) => {
+            for(const key in this.pointsSchema) {
+                if (key.includes(char.toUpperCase())) {
+                    this.points += this.pointsSchema[key];
+                    break;
+                };
+            };
+        });
+    };
+
+    recordPoints() {
+        wordChart = [{
+            word: this.word, 
+            points: this.points}];
+
+        this.wordsChart.push(wordChart);
+    };
+
+    getPoints(scrabbler) {
+        return this.wordsChart[scrabbler];
+    };
 };
 
 module.exports = ScrabblerSolver;

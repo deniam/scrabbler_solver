@@ -13,9 +13,12 @@ class ScrabblerSolver {
     };
 
     decodeWord(scrabbler) {
-        this.word = scrabbler.getWord();
-        this.decodedWord = scrabbler.getWord().split('');
-        console.log(this.word);
+        if(scrabbler.getWord() == null || scrabbler.getWord().includes('\t', '\n')) {
+            this.decodedWord = [];
+        } else {
+            this.word = scrabbler.getWord();
+            this.decodedWord = scrabbler.getWord().split('');
+        }
     };
 
     calculatePoints() {
@@ -31,15 +34,23 @@ class ScrabblerSolver {
     };
 
     recordPoints() {
-        wordChart = [{
+        const wordChart = {
             word: this.word, 
-            points: this.points}];
+            points: this.points};
 
         this.wordsChart.push(wordChart);
     };
 
-    getPoints(scrabbler) {
-        return this.wordsChart[scrabbler];
+    getPointsByWord(scrabbler) {
+        const findWord = scrabbler.getWord();
+        for (const index in this.wordsChart) {
+            const wordChart = this.wordsChart[index];
+            if (wordChart.word === findWord) {
+                return wordChart;
+            } else {
+                console.log("This word hasn't been checked yet");
+            }
+        };
     };
 };
 

@@ -45,6 +45,8 @@ describe("Acceptance Criteria", () => {
         scrabbler1 = new Scrabbler('');
         scrabblerSolver.decodeWord(scrabbler1);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(0);
     });
 
@@ -52,6 +54,7 @@ describe("Acceptance Criteria", () => {
         scrabbler2 = new Scrabbler(' \t\n');
         scrabblerSolver.decodeWord(scrabbler2);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(0);
     });
 
@@ -59,6 +62,7 @@ describe("Acceptance Criteria", () => {
         scrabbler3 = new Scrabbler(null);
         scrabblerSolver.decodeWord(scrabbler3);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(0);
     });
 
@@ -66,6 +70,7 @@ describe("Acceptance Criteria", () => {
         scrabbler4 = new Scrabbler('a');
         scrabblerSolver.decodeWord(scrabbler4);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(1);
     });
 
@@ -73,6 +78,7 @@ describe("Acceptance Criteria", () => {
         scrabbler5 = new Scrabbler('f');
         scrabblerSolver.decodeWord(scrabbler5);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(4);
     });
 
@@ -80,6 +86,7 @@ describe("Acceptance Criteria", () => {
         scrabbler6 = new Scrabbler('street');
         scrabblerSolver.decodeWord(scrabbler6);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(6);
     });
 
@@ -87,6 +94,7 @@ describe("Acceptance Criteria", () => {
         scrabbler7 = new Scrabbler('quirky');
         scrabblerSolver.decodeWord(scrabbler7);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(22);
     });
 
@@ -94,12 +102,22 @@ describe("Acceptance Criteria", () => {
         scrabbler7 = new Scrabbler('OXYPHENBUTAZONE');
         scrabblerSolver.decodeWord(scrabbler7);
         scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
         expect(scrabblerSolver.points).toEqual(41);
     });
+
+    it("save the word into the wordsChart only if the word has at least 1 point", () => {
+        scrabbler8 = new Scrabbler('123456780');
+        scrabblerSolver.decodeWord(scrabbler8);
+        scrabblerSolver.calculatePoints();
+        scrabblerSolver.recordPoints();
+        expect(scrabblerSolver.getWordsChart()).toEqual([
+            { word: 'OXYPHENBUTAZONE', points: 41 },
+            { word: 'quirky', points: 22 },
+            { word: 'cabbage', points: 14 },
+            { word: 'street', points: 6 },
+            { word: 'f', points: 4 },
+            { word: 'a', points: 1 }
+        ])
+    })
 });
-
-
-    scrabbler5 = new Scrabbler('f');
-    scrabbler6 = new Scrabbler('street');
-    scrabbler7 = new Scrabbler('quirky');
-    scrabbler8 = new Scrabbler('OXYPHENBUTAZONE');

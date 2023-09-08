@@ -37,8 +37,8 @@ class ScrabblerSolver {
         const wordChart = {
             word: this.word, 
             points: this.points};
-
-        this.wordsChart.push(wordChart);
+        if (wordChart.points !== 0) 
+        {this.wordsChart.push(wordChart)};
     };
 
     getPointsByWord(scrabbler) {
@@ -52,6 +52,9 @@ class ScrabblerSolver {
             }
         };
     };
+    getWordsChart() {
+        return this.wordsChart.sort((a, b) => b.points - a.points);
+    }
 };
 
 module.exports = ScrabblerSolver;
